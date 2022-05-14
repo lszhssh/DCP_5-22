@@ -7,6 +7,10 @@ public class CanSum {
      */
 
     /**
+     * Solution time: 15 minutes
+     */
+
+    /**
      * plan:
      * - as the name of the file suggests, this is the classic canSum problem that 
      * I learnt while doing dynamic programming
