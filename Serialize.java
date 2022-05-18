@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Serialize {
     /**
      * Problem from 5/16/22:
@@ -20,7 +23,7 @@ public class Serialize {
      * - write a basic Node class
      */
 
-    protected class Node {
+    public class Node {
         String value;
         Node left;
         Node right;
@@ -31,15 +34,45 @@ public class Serialize {
             this.right = right;
         }
 
-        // [] do we need helper functions?
+        // [V] do we need helper functions? - no
     }
 
     public String serialize(Node node) {
-        
-        return "";
+        if (node == null) {
+            return "#";
+        }
+        return node.value + " " + serialize(node.left) + " " + serialize(node.right);
     }
 
     public Node deserialize(String serialization) {
-        return new Node();
+        String[] strs = serialization.split(" ");
+        ArrayList<String> strList = new ArrayList<>();
+        for (String str : strs) {
+            strList.add(str);
+        }
+        Iterator<String> iter = strList.iterator();
+        return helper(iter);
+    }
+
+    public Node helper(Iterator iter) {
+        String val = (String) iter.next();
+        if (val.equals("#")) {
+            return null;
+        }
+        Node newNode = new Node(val, null, null);
+        newNode.left = helper(iter);
+        newNode.right = helper(iter);
+        return newNode;
+    }
+
+    public static void main(String[] args) {
+        Serialize obj = new Serialize();
+        Node n1 = obj.new Node("A", obj.new Node("B", null, null), 
+            obj.new Node("C", null, null));
+        System.out.println(obj.serialize(n1));
+        Node n2 = obj.deserialize(obj.serialize(n1));
+        System.out.println(n2.value);
+        System.out.println(n2.left.value);
+        System.out.println(n2.right.value);
     }
 }
