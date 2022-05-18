@@ -7,9 +7,7 @@ public class CanSum {
      * Bonus: Can you do this in one pass?
      */
 
-    /**
-     * Solution time: 15 minutes
-     */
+    // Solution time: 15 minutes
 
     /**
      * plan:

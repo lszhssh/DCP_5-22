@@ -6,9 +6,7 @@ public class ExclusiveMult {
      * original array except the one at i.
      */
 
-    /**
-     * Solution time: 13 minutes
-     */
+    // Solution time: 13 minutes
 
     /**
      * plan:

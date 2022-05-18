@@ -6,6 +6,8 @@ public class Serialize {
      * back into the tree.
      */
 
+    // Solution time: incomplete
+
     /**
      * plan:
      * - use some form of binary tree traversal; not sure which is best for
