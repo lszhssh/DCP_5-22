@@ -20,7 +20,7 @@ public class Pair {
         // It's a CS concept called closure, which I'm yet to understand.
         // Refer to Pair.py for the solution; I'm not sure how closure and first-class
         // functions are implemented in Java yet, but after watching some tutorials, I
-        // do feel like I understand the concept sufficiently well
+        // do feel like I understand the concept sufficiently well.
 
     int first, last;
 

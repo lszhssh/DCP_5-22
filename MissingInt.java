@@ -36,81 +36,40 @@ public class MissingInt {
      *         complexity, of which we need a constant time
      */
 
-    // Courtesy of https://www.programiz.com/dsa/radix-sort
-    // Using counting sort to sort the elements in the basis of significant places
-    void countingSort(int array[], int size, int place) {
-        int[] output = new int[size + 1];
-        int max = array[0];
-        for (int i = 1; i < size; i++) {
-        if (array[i] > max)
-            max = array[i];
-        }
-        int[] count = new int[max + 1];
-
-        for (int i = 0; i < max; ++i)
-        count[i] = 0;
-
-        // Calculate count of elements
-        for (int i = 0; i < size; i++)
-        count[(array[i] / place) % 10]++;
-
-        // Calculate cumulative count
-        for (int i = 1; i < 10; i++)
-        count[i] += count[i - 1];
-
-        // Place the elements in sorted order
-        for (int i = size - 1; i >= 0; i--) {
-        output[count[(array[i] / place) % 10] - 1] = array[i];
-        count[(array[i] / place) % 10]--;
-        }
-
-        for (int i = 0; i < size; i++)
-        array[i] = output[i];
-    }
-
-    // Courtesy of https://www.programiz.com/dsa/radix-sort
-    // Function to get the largest element from an array
-    int getMax(int array[], int n) {
-        int max = array[0];
-        for (int i = 1; i < n; i++)
-        if (array[i] > max)
-            max = array[i];
-        return max;
-    }
-
-    // Courtesy of https://www.programiz.com/dsa/radix-sort
-    // Main function to implement radix sort
-    void radixSort(int array[], int size) {
-        // Get maximum element
-        int max = getMax(array, size);
-
-        // Apply counting sort to sort elements based on place value.
-        for (int place = 1; max / place > 0; place *= 10)
-        countingSort(array, size, place);
-    }
-
     public int missingInt(int[] nums) {
-        radixSort(nums, nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] >= 1 && nums[i] <= nums.length) {
+                int val = nums[i];
+                int temp = nums[val - 1];
+                nums[i] = temp;
+                nums[val - 1] = val;
+            }
+        }
         int currNum = 1;
-        for (int num: nums) {
-            if (num > 0 && num == currNum) {
+        for (int num : nums) {
+            if (num == currNum) {
                 currNum++;
-            } else {
-                break;
             }
         }
         return currNum;
     }
 
     public static void main(String args[]) {
-        int[] data = { 121, 432, 564, 23, 1, 45, 788 };
         MissingInt obj = new MissingInt();
-        // obj.radixSort(data, size);
-        // System.out.println("Sorted Array in Ascending Order: ");
-        // System.out.println(Arrays.toString(data));
-        // System.out.println(obj.missingInt(data));
 
-        int[] data2 = {3, 4, 6, 7, 5};
-        System.out.println(obj.missingInt(data2));
+        int[] d = {121, 432, 564, 23, 1, 45, 788};
+        System.out.println(obj.missingInt(d)); //exp: 2
+
+        int[] d2 = {1, 2, 4, 3, 5};
+        System.out.println(obj.missingInt(d2)); //exp: 6
+
+        int[] d3 = {0, 3, 2, 6, 9};
+        System.out.println(obj.missingInt(d3)); //exp: 1
+
+        int[] d4 = {};
+        System.out.println(obj.missingInt(d4)); //exp: 1
+
+        int[] d5 = {0};
+        System.out.println(obj.missingInt(d4)); //exp: 1
     }
 }
