@@ -16,4 +16,11 @@ public class XORList {
     //    result its own class or is it still a node?
     // [] How do the conversion methods mentioned in the prompt help me? Do we 
     //    have to use pointers to solve this problem?
+
+    // How do you even XOR addresses? Are you doing this bitwise?
+    // (A XOR C) XOR C = A
+    // https://www.geeksforgeeks.org/xor-linked-list-a-memory-efficient-doubly-linked-list-set-1/#:~:text=This%20memory%20efficient%20Doubly%20Linked,of%20previous%20and%20next%20nodes.
+
+    // T: curr tail, N: new node/tail
+    // Currently: T's address is (prev)
 }
