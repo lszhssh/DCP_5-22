@@ -14,10 +14,7 @@ public class Encode {
         // try traversing the string and recursively finding number of possibilities
     
     public int numEncodings(String encoded) {
-        if (encoded.length() == 0) {
-            return 1;
-        }
-        if (encoded.length() == 1) {
+        if (encoded.length() == 0 || encoded.length() == 1) {
             return 1;
         }
         if (Integer.valueOf(encoded.substring(0, 2)) > 26) {
@@ -25,7 +22,6 @@ public class Encode {
         } else {
             return numEncodings(encoded.substring(1)) + numEncodings(encoded.substring(2));
         }
-        // return 0;
     }
 
     public static void main(String[] args) {
