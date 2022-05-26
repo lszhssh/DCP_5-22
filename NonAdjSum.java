@@ -7,7 +7,7 @@ public class NonAdjSum {
     // [5, 1, 1, 5] should return 10, since we pick 5 and 5.
     // Follow-up: Can you do this in O(N) time and constant space?
 
-    // Solution time:
+    // Solution time: 15min+
 
     // Plan:
     // - Without trying to optimize, a solution would be to iterate through the
@@ -17,23 +17,21 @@ public class NonAdjSum {
     //     workaround: skip any non-positive numbers since they will not contribute
     //     to the maximum sum.
     //   - Fundamental problem: our algorithm is too greedy; it would fail to 
-    //     discover more optimal combinations inaccessible to leap frogging
-
-    // 1 3 9 -32 9 0
+    //     discover more optimal combinations inaccessible to simple leap frogging
+    // - What if we approached this problem recursively while keeping track of the
+    //   maximum sum currently found? How to implement that?
+    //   - Base case: if you have one number, choose that number.
+    //   - Recursive step: return the best combination of the array not including
+    //     current digit and the digit immediately after it
 
     public int nonAdjSum(int[] nums) {
-        int largestSum = 0;
-        for (int i = 0; i < nums.length; i++) {
-            int currSum = 0;
-            int currPos = i;
-            while (currPos < nums.length) {
-                if (nums[currPos] < 1) {
-                    currPos--;
-                } else {
-                    
-                }
-            }
+        if (nums.length == 1) {
+            return nums[0];
         }
-        return largestSum;
+        if (nums[0] > 0) {
+            return 
+        }
+        
+        return 0;
     }
 }

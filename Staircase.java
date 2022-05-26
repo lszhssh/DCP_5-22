@@ -1,6 +1,6 @@
 public class Staircase {
     /**
-     * Problem from 5/13/22:
+     * Problem from 5/25/22:
      * There's a staircase with N steps, and you can climb 1 or 2 steps at a time.
      * Given N, write a function that returns the number of unique ways you can 
      * climb the staircase. The order of the steps matters.
