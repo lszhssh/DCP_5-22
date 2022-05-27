@@ -25,13 +25,6 @@ public class NonAdjSum {
     //     current digit and the digit immediately after it
 
     public int nonAdjSum(int[] nums) {
-        if (nums.length == 1) {
-            return nums[0];
-        }
-        if (nums[0] > 0) {
-            return 
-        }
-        
         return 0;
     }
 }
