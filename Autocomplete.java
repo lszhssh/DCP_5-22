@@ -88,22 +88,26 @@ public class Autocomplete {
         return false;
     }
 
-    public ArrayList<String> trieAutocomplete(String prefix, String[] strs) {
+    public ArrayList<String> startsWith(String prefix) {
         ArrayList<String> result = new ArrayList<>();
-        for (String str : strs) {
-            TrieNode currNode = this.root;
-            boolean startsWith = true;
-            for (int i = 0; i < str.length(); i++) {
-                char currChar = str.charAt(i);
-                if (!contains(currChar, currNode.children)) {
-                    startsWith = false;
-                    break;
+        TrieNode currNode = this.root;
+        // boolean prefixPossible = true;
+        for (int i = 0; i < prefix.length(); i++) {
+            char currChar = prefix.charAt(i);
+            if (contains(currChar, currNode.children)) {
+                for (TrieNode n : currNode.children) {
+                    if (n.data == currChar) {
+                        currNode = n;
+                    }
                 }
-            }
-            if (startsWith) {
-                result.add(str);
+            } else {
+                return result;
             }
         }
+        // prefix is possible, we're currently at the last letter of the prefix
+        // recursively print out all possibilities
+        // maybe use a helper function?
+        // print all branches from a given node
         return result;
     }
 
@@ -111,11 +115,7 @@ public class Autocomplete {
         TrieNode n1 = new TrieNode('n');
         Autocomplete obj = new Autocomplete(n1);
         String[] strs = new String[] {"dog", "deer", "deal"};
-        // obj.printArrayList(obj.autocomplete("de", strs));
         obj.add(strs);
-        // obj.printNodes(n1.children);
-        // obj.printNodes(n1.children.get(0).children);
-        obj.printNodes(n1.children.get(0).children.get(1).children.get(0).children);
-        // obj.printArrayList(obj.trieAutocomplete("de", strs));
+        obj.printNodes(n1.children.get(0).children.get(1).children.get(1).children);
     }
 }
