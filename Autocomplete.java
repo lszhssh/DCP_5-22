@@ -34,6 +34,12 @@ public class Autocomplete {
         }
     }
 
+    public void printNodes(ArrayList<TrieNode> nodes) {
+        for (TrieNode n : nodes) {
+            System.out.print(n.data + " ");
+        }
+    }
+
     static class TrieNode {
         char data;
         ArrayList<TrieNode> children;
@@ -55,9 +61,9 @@ public class Autocomplete {
     public void add(String[] strs) {
         for (String str : strs) {
             TrieNode currNode = this.root;
-            for (int i = 0; i < str.length() - 1; i++) {
+            for (int i = 0; i < str.length(); i++) {
                 char currChar = str.charAt(i);
-                if (!currNode.children.contains(currChar)) {
+                if (!contains(currChar, currNode.children)) {
                     TrieNode newNode = new TrieNode(currChar);
                     currNode.children.add(newNode);
                     currNode = newNode;
@@ -73,6 +79,15 @@ public class Autocomplete {
         }
     }
 
+    public static boolean contains(char c, ArrayList<TrieNode> nodes) {
+        for (TrieNode n : nodes) {
+            if (n.data == c) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<String> trieAutocomplete(String prefix, String[] strs) {
         ArrayList<String> result = new ArrayList<>();
         for (String str : strs) {
@@ -80,7 +95,7 @@ public class Autocomplete {
             boolean startsWith = true;
             for (int i = 0; i < str.length(); i++) {
                 char currChar = str.charAt(i);
-                if (!currNode.children.contains(currChar)) {
+                if (!contains(currChar, currNode.children)) {
                     startsWith = false;
                     break;
                 }
@@ -98,6 +113,9 @@ public class Autocomplete {
         String[] strs = new String[] {"dog", "deer", "deal"};
         // obj.printArrayList(obj.autocomplete("de", strs));
         obj.add(strs);
-        obj.printArrayList(obj.trieAutocomplete("de", strs));
+        // obj.printNodes(n1.children);
+        // obj.printNodes(n1.children.get(0).children);
+        obj.printNodes(n1.children.get(0).children.get(1).children.get(0).children);
+        // obj.printArrayList(obj.trieAutocomplete("de", strs));
     }
 }
