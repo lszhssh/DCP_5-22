@@ -17,7 +17,7 @@ public class Orders {
         // - Doubly LL should be the same, but easier to implement get_last since
         // no need to make a copy
     // - Use an array; record is add, get_last is get(len - i)
-        // - Time: record: O(n), get_last: O(i)
+        // - Time: record: O(n), get_last: O(1)
         // - Space: O(n)
 
     static class Node {
@@ -32,6 +32,9 @@ public class Orders {
 
     Node head;
     Node tail;
+    
+    String[] log;
+    int currIdx;
 
     public Orders() {
         this.head = new Node(null);
@@ -57,6 +60,25 @@ public class Orders {
         return currNode.order_id;
     }
 
+    // To improve the time complexity of get_last, we can use a circular buffer
+    public Orders(int n) {
+        this.log = new String[n];
+        this.currIdx = 0;
+    }
+
+    public void circRecord(String order_id) {
+        this.log[currIdx] = order_id;
+        currIdx = (currIdx + 1) % this.log.length;
+    }
+
+    public String circGetLast(int i) {
+        int idx = currIdx - i;
+        if (idx < 0) {
+            idx += this.log.length;
+        }
+        return this.log[idx];
+    }
+
     public static void main(String[] args) {
         Orders log = new Orders();
         log.record("first");
@@ -65,5 +87,14 @@ public class Orders {
         System.out.println(log.get_last(1));
         System.out.println(log.get_last(2));
         System.out.println(log.get_last(3));
+        
+        Orders circLog = new Orders(3);
+        circLog.circRecord("first");
+        circLog.circRecord("second");
+        circLog.circRecord("third");
+        circLog.circRecord("fourth");
+        System.out.println(circLog.circGetLast(1)); //exp: 4th
+        System.out.println(circLog.circGetLast(2)); //exp: 3rd
+        System.out.println(circLog.circGetLast(3)); //exp: 2nd
     }
 }
