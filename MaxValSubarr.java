@@ -10,8 +10,59 @@
 // Do this in O(n) time and O(k) space. You can modify the input array 
 // in-place and you do not need to store the results. You can simply print them out as you compute them.
 
-// Solution time:
+// Solution time: incomplete
 
 public class MaxValSubarr {
-    
+    // Helper methods
+    public static int max(int n1, int n2) {
+        if (n2 > n1) {
+            return n2;
+        }
+        return n1;
+    }
+
+    public static void printNums(int[] nums) {
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+    }
+
+    // Naive solution
+    public static int[] naiveMaxValSubarr(int[] nums, int k) {
+        int resultArrLen = nums.length - k + 1;
+        int[] result = new int[resultArrLen];
+        for (int i = 0; i < resultArrLen; i++) {
+            int maxValSubarr = nums[i];
+            for (int j = 0; j < k; j++) {
+                maxValSubarr = max(maxValSubarr, nums[i + j]);
+            }
+            result[i] = maxValSubarr;
+        }
+        return result;
+        // Time: O(nk) = O(n) 
+        // Space: O(n-k) = O(n)
+    }
+
+    // Optimized solution
+    public static void optimMaxValSubarr(int[] nums, int k) {
+        int resultArrLen = nums.length - k + 1;
+        for (int i = 0; i < resultArrLen; i++) {
+            int maxValSubarr = nums[i];
+            for (int j = 0; j < k; j++) {
+                maxValSubarr = max(maxValSubarr, nums[i + j]);
+            }
+            System.out.print(maxValSubarr + " ");
+        }
+        // Time: O(nk)
+        // Space: O(1)
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[] {10, 5, 2, 7, 8, 7};
+        int k = 3;
+        int[] result = naiveMaxValSubarr(nums, k);
+        printNums(result);
+
+        optimMaxValSubarr(nums, k);
+    }
 }
