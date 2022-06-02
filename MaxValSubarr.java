@@ -39,7 +39,7 @@ public class MaxValSubarr {
             result[i] = maxValSubarr;
         }
         return result;
-        // Time: O(nk) = O(n) 
+        // Time: O(nk)
         // Space: O(n-k) = O(n)
     }
 
